@@ -1,0 +1,27 @@
+
+//EMERSON SOUSA CHAVES - 16/0005523//
+
+
+Algoritmo encontrar vetor
+
+entrada: int vetor; //VETOR//
+entrada: int i; //INDICE//
+entrada: int n; //TAMANHO VETOR//
+entrada: int z; //USUÁRIO QUER//
+
+for i<--0 até n-1 faça 
+	if vetor[i]<--z então
+	imprima ("i")
+		else
+		imprima ("Vetor não encontrado")
+	fim-if
+
+		fim-else
+
+fim-for
+
+fim programa		  
+	
+
+
+
