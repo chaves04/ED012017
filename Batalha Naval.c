@@ -26,7 +26,7 @@ void GerarBarco(int matriz[6][7])
         i=rand()%6;
         j=rand()%4;
 
-        if((navio>0))/*Gerar o encouraçado*/
+        if((navio>0))/*Gerar o encouraÃ§ado*/
         {
             navio=navio-1;
             matriz[i][j]=4;
@@ -38,7 +38,7 @@ void GerarBarco(int matriz[6][7])
         i=rand()%6;
         j=rand()%6;
 
-        if((sub>0)&&((matriz[i][j]<=0)&&(matriz[i][j+1]<=0))) /* Verifica se a posição esta livre e a próxima- E Gera Submarino*/
+        if((sub>0)&&((matriz[i][j]<=0)&&(matriz[i][j+1]<=0))) /* Verifica se a posiÃ§Ã£o esta livre e a prÃ³xima- E Gera Submarino*/
         {
             sub=sub-1;
             matriz[i][j]=2;
@@ -47,54 +47,45 @@ void GerarBarco(int matriz[6][7])
     }
 }
 
-int Tiro(int matriz[6][7])
+int Tiro(int matriz[6][7], int P1[6][7],int P2[6][7])
 {
     int i,j;
-    int P1nganhou, P2nganhou;
-
+    P1=0;
+    P2=0;
+    
     printf("\nDigite a linha que deseja atirar: ");
     scanf("%d", &i);
     printf("\nDigite a coluna que deseja atirar: ");
     scanf("%d", &j);
 
+    for(P1=0;P1<10;P1++){
+    }    
+    for(P2=0;P2<10;P2++){
+    }
+    
+            while (((P1) && (P2) >=10)){
+    
     if (matriz[i][j] !=0)
     {
         if (matriz[i][j] =4)
         {
-            return 4;
+            printf("Voce acertou parte de um navio");
+            scanf(%d, P1)
         }
-        else
+        if(matriz[i][j] =2)
         {
-            return 2;
+            printf("Voce acertou parte de um submarino");
+            
         }
     }
     else
     {
-
-        return 0;
-
-    }
-
-    if (matriz[i][j]=4)
-    {
-        printf("Voce acertou parte de um navio");
-
-        if (matriz[i][j]=2)
-        {
-            printf("Voce acertou parte de um submarino");
-
-            }
-    }
-
-        else
-        {
         printf("Voce acertou agua");
+       
 
-        }
+    }
 
-
-
-
+    }
 }
 
 
@@ -105,22 +96,22 @@ void Tela(int P1Tela[6][7],int P2Tela[6][7])
     printf(" ____        _        _ _             _   _                  _\n| __ )  __ _| |_ __ _| | |__   __ _  | \\ | | __ ___   ____ _| |\n|  _ \\ / _` | __/ _` | | '_ \\ / _` | |  \\| |/ _` \\ \\ / / _` | |\n| |_) | (_| | |_ (_| | | | | | (_| | | |\\  | (_| |\\ V / (_| | |\n|____/ \\__,_|\\__\\__,_|_|_| |_|\\__,_| |_| \\_|\\__,_| \\_/ \\__,_|_|\n");
     printf("\n\t     JOGADOR 1\t\t     JOGADOR 2\n\t   ");
 
-    for(j=0; j<7; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(j=0; j<7; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("%d ",j+1);
     }
 
     printf("\t   ");
 
-    for(j=0; j<7; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(j=0; j<7; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("%d ",j+1);
     }
 
     printf("\n");/*NOME BATALHA NAVAL GIGANTE \/*/
-    printf("\t O---------------O\t O---------------O\n");/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    printf("\t O---------------O\t O---------------O\n");/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
 
-    for(i=0; i<6; i++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(i=0; i<6; i++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("\t |\t\t |\t |\t\t |\n");
         printf("\t%d| ",i+1);
@@ -132,7 +123,7 @@ void Tela(int P1Tela[6][7],int P2Tela[6][7])
 
         printf("|\t%d| ",i+1);
 
-        for(j=0; j<7; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+        for(j=0; j<7; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
         {
             printf("%d ",P2Tela[i][j]);
         }
@@ -173,6 +164,7 @@ int main()
     GerarBarco(P1);
     GerarBarco(P2);
     Tela(P1Tela,P2Tela);
+    Tiro(P1,P2);
 
 
     for(i=0; i<6; i++)
