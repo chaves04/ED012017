@@ -34,7 +34,7 @@ void GerarBarco(int matriz[6][8])
         i=rand()%6;
         j=rand()%5;
 
-        if((navio>0))/*Gerar o encouraçado*/
+        if((navio>0))/*Gerar o encouraÃ§ado*/
         {
             navio=navio-1;
             matriz[i][j]=4;
@@ -46,7 +46,7 @@ void GerarBarco(int matriz[6][8])
         i=rand()%6;
         j=rand()%7;
 
-        if((sub>0)&&((matriz[i][j]<=0)&&(matriz[i][j+1]<=0))) /* Verifica se a posição esta livre e a próxima- E Gera Submarino*/
+        if((sub>0)&&((matriz[i][j]<=0)&&(matriz[i][j+1]<=0))) /* Verifica se a posiÃ§Ã£o esta livre e a prÃ³xima- E Gera Submarino*/
         {
             sub=sub-1;
             matriz[i][j]=2;
@@ -107,22 +107,22 @@ void Tela(int P1Tela[6][8],int P2Tela[6][8],int P1Ponto,int P2Ponto)
     printf("        JOGADOR 1         JOGADOR 2\n     ");
     printf("   PONTO = %d         PONTO = %d\n     ",P1Ponto,P2Ponto);
 
-    for(j=0; j<8; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(j=0; j<8; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("%d ",j+1);
     }
 
     printf("  ");
 
-    for(j=0; j<8; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(j=0; j<8; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("%d ",j+1);
     }
 
     printf("\n");
-    printf("   O-----------------O-----------------O\n");/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    printf("   O-----------------O-----------------O\n");/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
 
-    for(i=0; i<6; i++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(i=0; i<6; i++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("   |\t\t     |\t\t       |\n");
         printf("  %d| ",i+1);
@@ -141,7 +141,7 @@ void Tela(int P1Tela[6][8],int P2Tela[6][8],int P1Ponto,int P2Ponto)
 
         printf("| ",i+1);
 
-        for(j=0; j<8; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+        for(j=0; j<8; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
         {
             if(P2Tela[i][j]==3)
             {
@@ -179,23 +179,33 @@ void Tela(int P1Tela[6][8],int P2Tela[6][8],int P1Ponto,int P2Ponto)
         {
             printf("   10 Pontos para ganhar");
         }
+         if(i==5)
+        {
+            printf("       (EXISTE 1 ENCOURACADO E 3 SUBMARINOS)");
+
+        }
         printf("\n");
     }
     printf("   |\t\t     |\t\t       |\n");
     printf("   O-----------------O-----------------O");
     printf("\n     ");
 
-    for(j=0; j<8; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(j=0; j<8; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("%d ",j+1);
     }
 
     printf("  ");
 
-    for(j=0; j<8; j++)/*@@@@SÓ PARTE GRÁFICA!@@@@*/
+    for(j=0; j<8; j++)/*@@@@SÃ“ PARTE GRÃFICA!@@@@*/
     {
         printf("%d ",j+1);
     }
+     if(i==5)
+        {
+            printf("       (EXISTE 1 ENCOURACADO E 3 SUBMARINOS)");
+
+        }
     printf("\n");
 
 }
@@ -235,7 +245,7 @@ int main()
 
             system("clear||cls");
 
-            if(P1Ponto!=10)/*jogada player 2,roda enquanto player 1 não ganhar*/
+            if(P1Ponto!=10)/*jogada player 2,roda enquanto player 1 nÃ£o ganhar*/
             {
                 Tela(P1Tela,P2Tela,P1Ponto,P2Ponto);/*jogada player 2*/
                 printf("\t\t Jogador 2\n");/*jogada player 2*/
