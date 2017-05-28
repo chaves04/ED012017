@@ -1,3 +1,8 @@
+/* TRABALHO ESTRUTURA DE DADOS (BATALHA NAVAL)
+RAFAEL WAITI  GITIRANA UMETSU - 16/0017114
+EMERSON SOUSA CHAVES - 16/0005523
+*/
+
 #include<stdio.h>
 #include <stdlib.h>
 #include<string.h>
@@ -36,6 +41,8 @@ void liberaAgenda(t_lista* lista)
 void InsereContato(t_lista* lista)
 {
     t_elemento* elemento= (t_elemento *)malloc(sizeof(t_elemento));
+    t_elemento* ant = NULL;
+    t_elemento* p;
     do
     {
         elemento->nome[29]='\0';
@@ -65,8 +72,24 @@ void InsereContato(t_lista* lista)
     }
     while(elemento->num[13]!='\0');
 
-    elemento->proximo = lista->primeiro;
-    lista->primeiro = elemento;
+    p = lista->primeiro;
+
+    if(lista->primeiro == NULL){
+        elemento->proximo = NULL;
+        lista->primeiro = elemento;
+    }
+    else{
+        while(p != NULL && strcmp(p->nome, elemento->nome) < 0){
+            ant = p;
+            p = p->proximo;
+        }
+        elemento->proximo = p;
+
+        if(ant == NULL)
+            lista->primeiro = elemento;
+        else
+            ant->proximo = elemento;
+    }
 
     printf("%s\n",elemento->nome);
     printf("%s\n",elemento->endEletronico);
@@ -257,6 +280,3 @@ int main()
     }
     while(0==0);
 }
-
-
- 
