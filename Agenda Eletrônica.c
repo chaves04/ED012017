@@ -202,7 +202,7 @@ void buscaContato( t_lista* lista)
                 }
                 else
                 {
-                    elementoAux = elemento->proximo;
+                    elementoAux = elementoAux->proximo;
                     free(elemento);
                     printf("Contato apagado");
                     getchar();
