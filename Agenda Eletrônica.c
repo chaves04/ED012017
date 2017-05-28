@@ -1,58 +1,262 @@
 #include<stdio.h>
-#include<stdlib.h>
- 
-typedef struct Agenda{
-    char x[30];
-    char y[30];
-    int z[10];
-    struct agenda *proximo;
-}data_agenda;
- 
-int main(int argc, char *arqv[]){
-    data_agenda *ini_agenda;
-    data_agenda *proximo_agenda;
-    int resp;
- 
-    ini_agenda = (data_agenda *)malloc(sizeof(data_agenda));
-    if(ini_agenda == NULL)
-        exit(1);
-    proximo_agenda = ini_agenda;
-    while(1)
+#include <stdlib.h>
+#include<string.h>
+
+typedef struct elemento
+{
+    char nome[30];
+    char endEletronico[30];
+    char num[14];
+    struct elemento* proximo;
+} t_elemento;
+
+typedef struct lista
+{
+    t_elemento* primeiro;
+} t_lista;
+
+/*------------------------------------------------liberaAgenda----------------------------------------------------------*/
+
+void liberaAgenda(t_lista* lista)
+{
+    t_elemento* aux = lista->primeiro;
+
+    while( aux != NULL )
     {
- 
-            printf("Digite o nome: ");
-            scanf("%[^\n]s", &proximo_agenda->x);
-            getchar();
- 
-            printf("Digite o endereco: ");
-            scanf("%[^\n]s", &proximo_agenda->y);
-           	
- 
-            printf("Digite o telefone: ");
-            scanf("%s", &proximo_agenda->z);
- 
-            printf("Deseja continua? <1> <outro valor> NAO: ");
-            scanf("%d", &resp);
- 
-            if(resp == 1)
-            {
-                proximo_agenda->proximo = (data_agenda *)malloc(sizeof(data_agenda));
-                proximo_agenda = proximo_agenda->proximo;
-            }
-            else
-                break;
- 
+        lista->primeiro = lista->primeiro->proximo;
+        free(aux);
+        aux = lista->primeiro;
     }
-            printf("\n");
-            proximo_agenda->proximo = NULL;
-            proximo_agenda = ini_agenda;
-            while(proximo_agenda != NULL)
-            {
-                    printf("nome: %s, endereco: %s, telefone: %s", proximo_agenda->x, proximo_agenda->y, proximo_agenda->z);
-                    proximo_agenda = proximo_agenda->proximo;
-            }
- 
- return 0;
+
+    free(aux);
 }
- 
+
+/*-----------------------------------------------InsereInicio-----------------------------------------------------------*/
+
+void InsereContato(t_lista* lista)
+{
+    t_elemento* elemento= (t_elemento *)malloc(sizeof(t_elemento));
+    do
+    {
+        elemento->nome[29]='\0';
+        elemento->nome[0]='\0';
+        printf("Digite o nome: ");
+        scanf("%[^\n]s", &elemento->nome);
+        getchar();
+    }
+    while((elemento->nome[29] != '\0') && (elemento->nome[0] == '\0'));
+
+    do
+    {
+        elemento->endEletronico[29]='\0';
+        elemento->endEletronico[0]='\0';
+        printf("Digite o endereco: ");
+        scanf("%[^\n]s", &elemento->endEletronico);
+        getchar();
+    }
+    while((elemento->endEletronico[29] != '\0') && (elemento->endEletronico[0] == '\0'));
+
+    do
+    {
+        elemento->num[13]='\0';
+        printf("Digite o telefone: ");
+        scanf("%[^\n]s", &elemento->num);
+        getchar();
+    }
+    while(elemento->num[13]!='\0');
+
+    elemento->proximo = lista->primeiro;
+    lista->primeiro = elemento;
+
+    printf("%s\n",elemento->nome);
+    printf("%s\n",elemento->endEletronico);
+    printf("%s\n",elemento->num);
+    getchar();
+}
+/*----------------------------------------------------------------------------------------------------------*/
+
+void imprimeAgenda( t_lista* lista)
+{
+    t_elemento* elemento = lista->primeiro;
+
+    if(elemento == NULL)
+    {
+        printf("@@@@Agenda Vazia!!!@@@\n");
+        getchar();
+        return;
+    }
+
+    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo)
+    {
+        printf("%s\n",elemento->nome);
+        printf("%s\n",elemento->endEletronico);
+        printf("%s\n",elemento->num);
+        printf("\n\n");
+    }
+
+    printf("\n");
+
+    getchar();
+}
+
+/*----------------------------------------------------------------------------------------------------------*/
+
+void buscaContato( t_lista* lista)
+{
+    t_elemento* elemento = lista->primeiro;
+    t_elemento* elementoAux =lista->primeiro;
+    char nome[30];
+    int menu;
+
+    if(elemento == NULL)
+    {
+        printf("@@@@Agenda Vazia!!!@@@@\n");
+        getchar();
+        return;
+    }
+
+    printf("Digite o nome do contato(Nao precisa de sobrenome)\n");
+    scanf("%[^\n]s",&nome);
+    getchar();
+
+    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo)
+    {
+        if(strncmp(elemento->nome, nome,strlen(nome))==0)
+        {
+            printf("%s\n",elemento->nome);
+            printf("%s\n",elemento->endEletronico);
+            printf("%s\n",elemento->num);
+            printf("1. Editar\n");
+            printf("2. Deletar\n");
+            printf("3. Procurar proximo contato com o mesmo nome inicial\n");
+            printf("0. Sair\n");
+            scanf("%d",&menu);
+            getchar();
+
+            switch(menu)
+            {
+            case 1:
+                do
+                {
+                    elemento->nome[29]='\0';
+                    elemento->nome[0]='\0';
+                    printf("Digite o nome: ");
+                    scanf("%[^\n]s", &elemento->nome);
+                    getchar();
+                }
+                while((elemento->nome[29] != '\0') && (elemento->nome[0] == '\0'));
+
+                do
+                {
+                    elemento->endEletronico[29]='\0';
+                    elemento->endEletronico[0]='\0';
+                    printf("Digite o endereco: ");
+                    scanf("%[^\n]s", &elemento->endEletronico);
+                    getchar();
+                }
+                while((elemento->endEletronico[29] != '\0') && (elemento->endEletronico[0] == '\0'));
+
+                do
+                {
+                    elemento->num[13]='\0';
+                    printf("Digite o telefone: ");
+                    scanf("%[^\n]s", &elemento->num);
+                    getchar();
+                }
+                while(elemento->num[13]!='\0');
+
+                printf("Editado!");
+                getchar();
+                break;
+            case 2:
+                if(elemento == elementoAux)
+                {
+                    lista->primeiro = elemento->proximo;
+                    free(elemento);
+                    printf("Contato apagado");
+                    getchar();
+                    return;
+                }
+                else
+                {
+                    elementoAux = elemento->proximo;
+                    free(elemento);
+                    printf("Contato apagado");
+                    getchar();
+                    return;
+                }
+                break;
+            case 3:
+                break;
+            case 0:
+                return;
+            default:
+                printf("@@@@@Digite uma opcao valida!!@@@@@@");
+                getchar();
+            }
+            elementoAux=elemento;
+        }
+    }
+
+    printf("@@@ Contato Nao Existe@@@");
+    getchar();
+    return ;
+}
+
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------*/
+
+int main()
+{
+    int menu;
+    t_lista* lista  =  (t_lista *)  malloc(sizeof(t_lista));
+    lista->primeiro = NULL;
+
+
+    do
+    {
+        system("cls || clear");
+
+        printf("Agenda-Lista de Contatos\n");
+        printf("1. Inserir na lista\n");
+        printf("2. Listar Contatos\n");
+        printf("3. Buscar contato(Editar/Deletar)\n");
+        printf("0. Sair\n");
+
+        scanf("%d", &menu);
+        getchar();
+
+        switch(menu)
+        {
+        case 1:
+            system("cls || clear");
+            InsereContato(lista);
+            break;
+
+        case 2:
+            system("cls || clear");
+            imprimeAgenda(lista);
+            break;
+
+        case 3:
+            system("cls || clear");
+            buscaContato(lista);
+            break;
+
+        case 0:
+            liberaAgenda(lista);
+            return 0;
+
+        default:
+            printf("@@@@@Digite uma opcao valida!!@@@@@@");
+            getchar();
+        }
+    }
+    while(0==0);
+}
+
+
  
