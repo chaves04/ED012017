@@ -7,7 +7,7 @@ EMERSON SOUSA CHAVES - 16/0005523
 #include<stdlib.h>
 #include<string.h>
 
-typedef struct elemento
+typedef struct elemento /*Elementos criados e prontos para dar seguimento a lista encadeada*/
 {
     char nome[30];
     char endEletronico[30];
@@ -78,7 +78,7 @@ void InsereContato(t_lista* lista)
         elemento->proximo = NULL;
         lista->primeiro = elemento;
     }
-    else{
+    else{ /*  Ordena agenda - foi usado funcoes da biblioteca de string */
         while(p != NULL && strcmp(p->nome, elemento->nome) < 0){
             ant = p;
             p = p->proximo;
@@ -90,26 +90,25 @@ void InsereContato(t_lista* lista)
         else
             ant->proximo = elemento;
     }
-
+/*------------------------------------------------------------------------------------------------------*/
     printf("%s\n",elemento->nome);
     printf("%s\n",elemento->endEletronico);
     printf("%s\n",elemento->num);
     getchar();
-}
-/*----------------------------------------------------------------------------------------------------------*/
+}/*Fim da funcao insere*/
 
 void imprimeAgenda( t_lista* lista)
 {
     t_elemento* elemento = lista->primeiro;
 
-    if(elemento == NULL)
+    if(elemento == NULL) /*Ve se a agenda nao esta vazia*/
     {
         printf("@@@@Agenda Vazia!!!@@@\n");
         getchar();
         return;
     }
 
-    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo)
+    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo) /*insere na agenda*/
     {
         printf("%s\n",elemento->nome);
         printf("%s\n",elemento->endEletronico);
@@ -124,6 +123,8 @@ void imprimeAgenda( t_lista* lista)
 
 /*----------------------------------------------------------------------------------------------------------*/
 
+
+/*Busca contatos na agenda, tanto para editar e excluir*/
 void buscaContato( t_lista* lista)
 {
     t_elemento* elemento;
@@ -138,7 +139,7 @@ void buscaContato( t_lista* lista)
         return;
     }
 
-    printf("Digite o nome do contato(Nao precisa de sobrenome)\n");
+    printf("Digite o nome do contato(Nao precisa de sobrenome)\n"); /*Busca contatos*/
     scanf("%[^\n]s",&nome);
     getchar();
 
@@ -158,7 +159,7 @@ void buscaContato( t_lista* lista)
 
             switch(menu)
             {
-            case 1:
+            case 1: /*Edita*/
                 do
                 {
                     elemento->nome[29]='\0';
@@ -181,7 +182,7 @@ void buscaContato( t_lista* lista)
 
                 do
                 {
-                    elemento->num[13]='\0';
+                    elemento->num[13]='\0'; 
                     printf("Digite o telefone: ");
                     scanf("%[^\n]s", &elemento->num);
                     getchar();
@@ -191,7 +192,7 @@ void buscaContato( t_lista* lista)
                 printf("Editado!");
                 getchar();
                 return;
-            case 2:
+            case 2: /*Deleda da agenda*/
                 if(elemento == elementoAux)
                 {
                     lista->primeiro = elemento->proximo;
@@ -208,9 +209,9 @@ void buscaContato( t_lista* lista)
                     getchar();
                     return;
                 }
-            case 3:
+            case 3:/*procura proximo nome igual*/
                 break;
-            case 0:
+            case 0:/*Sai da edicao*/
                 return;
             default:
                 printf("@@@@@Digite uma opcao valida!!@@@@@@");
@@ -223,13 +224,9 @@ void buscaContato( t_lista* lista)
     printf("@@@ Contato Nao Existe@@@");
     getchar();
     return ;
-}
+} 
 
-
-
-
-
-/*----------------------------------------------------------------------------------------------------------*/
+/*----------------------------------------------Fim de busca------------------------------------------------------------*/
 
 int main()
 {
