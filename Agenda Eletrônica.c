@@ -4,7 +4,7 @@ EMERSON SOUSA CHAVES - 16/0005523
 */
 
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #include<string.h>
 
 typedef struct elemento
@@ -126,8 +126,8 @@ void imprimeAgenda( t_lista* lista)
 
 void buscaContato( t_lista* lista)
 {
-    t_elemento* elemento = lista->primeiro;
-    t_elemento* elementoAux =lista->primeiro;
+    t_elemento* elemento;
+    t_elemento* elementoAux = lista->primeiro;
     char nome[30];
     int menu;
 
@@ -144,7 +144,7 @@ void buscaContato( t_lista* lista)
 
     for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo)
     {
-        if(strncmp(elemento->nome, nome,strlen(nome))==0)
+        if(strncmp(elemento->nome, nome,strlen(nome)) == 0)
         {
             printf("%s\n",elemento->nome);
             printf("%s\n",elemento->endEletronico);
@@ -190,7 +190,7 @@ void buscaContato( t_lista* lista)
 
                 printf("Editado!");
                 getchar();
-                break;
+                return;
             case 2:
                 if(elemento == elementoAux)
                 {
@@ -202,13 +202,12 @@ void buscaContato( t_lista* lista)
                 }
                 else
                 {
-                    elementoAux = elementoAux->proximo;
+                    elementoAux->proximo = elemento->proximo;
                     free(elemento);
                     printf("Contato apagado");
                     getchar();
                     return;
                 }
-                break;
             case 3:
                 break;
             case 0:
@@ -217,8 +216,8 @@ void buscaContato( t_lista* lista)
                 printf("@@@@@Digite uma opcao valida!!@@@@@@");
                 getchar();
             }
-            elementoAux=elemento;
         }
+        elementoAux=elemento;
     }
 
     printf("@@@ Contato Nao Existe@@@");
