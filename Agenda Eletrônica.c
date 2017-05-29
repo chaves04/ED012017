@@ -108,7 +108,7 @@ void imprimeAgenda( t_lista* lista)
         return;
     }
 
-    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo) /*insere na agenda*/
+    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo) /*Imprime informacoes dos contatos na agenda.*/
     {
         printf("%s\n",elemento->nome);
         printf("%s\n",elemento->endEletronico);
@@ -132,7 +132,7 @@ void buscaContato( t_lista* lista)
     char nome[30];
     int menu;
 
-    if(elemento == NULL)
+    if(elemento == NULL) /*Se nao tiver elemento na lista ele retorna informacao para usuario*/
     {
         printf("@@@@Agenda Vazia!!!@@@@\n");
         getchar();
@@ -143,9 +143,9 @@ void buscaContato( t_lista* lista)
     scanf("%[^\n]s",&nome);
     getchar();
 
-    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo)
+    for(elemento = lista->primeiro; elemento != NULL; elemento = elemento->proximo) /*Percorre todos os elementos ate encontrar o que om usuario deseja*/
     {
-        if(strncmp(elemento->nome, nome,strlen(nome)) == 0)
+        if(strncmp(elemento->nome, nome,strlen(nome)) == 0)/*compara*/
         {
             printf("%s\n",elemento->nome);
             printf("%s\n",elemento->endEletronico);
@@ -192,7 +192,7 @@ void buscaContato( t_lista* lista)
                 printf("Editado!");
                 getchar();
                 return;
-            case 2: /*Deleda da agenda*/
+            case 2: /*Deleta todas as informacoes de um contato na agenda*/
                 if(elemento == elementoAux)
                 {
                     lista->primeiro = elemento->proximo;
@@ -209,7 +209,7 @@ void buscaContato( t_lista* lista)
                     getchar();
                     return;
                 }
-            case 3:/*procura proximo nome igual*/
+            case 3:/*Procura o proximo nome igual, se tiver*/
                 break;
             case 0:/*Sai da edicao*/
                 return;
