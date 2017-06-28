@@ -1,3 +1,8 @@
+/* ATIVIDADE
+Emerson Sousa Chaves
+16/0005523
+*/
+
 #include<stdio.h>
 
 int main (){
