@@ -7,13 +7,13 @@ Algoritmo encontrar vetor
 entrada: int vetor; //VETOR//
 entrada: int i; //INDICE//
 entrada: int n; //TAMANHO VETOR//
-entrada: int z; //USU¡RIO QUER//
+entrada: int z; //USU√ÅRIO QUER//
 
-for i<--0 atÈ n-1 faÁa 
-	if vetor[i]<--z ent„o
+for i<--0 at√© n-1 fa√ßa 
+	if vetor[i]<--z ent√£o
 	imprima ("i")
 		else
-		imprima ("Vetor n„o encontrado")
+		imprima ("Vetor n√£o encontrado")
 	fim-if
 
 		fim-else
